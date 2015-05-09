@@ -1,6 +1,7 @@
 import org.junit.Before;
 import org.junit.Test;
 import twitter4j.Status;
+import twitter4j.URLEntity;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -272,16 +273,29 @@ public class CorpusTest {
     }
 
     @Test
-    public void testEquals(){
-        corpus.addDocument(knowEverything);
-        corpus.addDocument(afterLife);
-        corpus.addDocument(helloGoodbye);
+    public void testGetAverageNumberOfURLsPerTweetForAuthor(){
+        Status twoEntityStatus = mock(Status.class);
+        when(twoEntityStatus.getText()).thenReturn("");
+        URLEntity[] twoEntities = {mock(URLEntity.class), mock(URLEntity.class)};
+        when(twoEntityStatus.getURLEntities()).thenReturn(twoEntities);
+        Document twoEntityDocument = new Document(twoEntityStatus, "URL User");
 
-        Corpus identicalCorpus = new Corpus();
-        identicalCorpus.addDocument(knowEverything);
-        identicalCorpus.addDocument(afterLife);
-        identicalCorpus.addDocument(helloGoodbye);
+        Status threeEntityStatus = mock(Status.class);
+        when(threeEntityStatus.getText()).thenReturn("");
+        URLEntity[] threeEntities = {mock(URLEntity.class), mock(URLEntity.class), mock(URLEntity.class)};
+        when(threeEntityStatus.getURLEntities()).thenReturn(threeEntities);
+        Document threeEntityDocument = new Document(threeEntityStatus, "URL User");
 
-        assertTrue(corpus.equals(identicalCorpus));
+        Status zeroEntityStatus = mock(Status.class);
+        when(zeroEntityStatus.getText()).thenReturn("");
+        when(zeroEntityStatus.getURLEntities()).thenReturn(new URLEntity[]{});
+        Document zeroEntityDocument = new Document(zeroEntityStatus, "URL User");
+
+        corpus.addDocument(twoEntityDocument);
+        corpus.addDocument(threeEntityDocument);
+        corpus.addDocument(zeroEntityDocument);
+
+        assertEquals(5/3.0, corpus.getAverageNumberOfURLsPerTweetForAuthor("URL User"), 0);
     }
+
 }

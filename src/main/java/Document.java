@@ -1,10 +1,18 @@
+import twitter4j.Status;
+
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Document {
     private String text, author;
+    private Status status;
 
+
+    public Document(Status status, String author){
+        this(status.getText(), author);
+        this.status = status;
+    }
 
     public Document(String text, String author){
         this.text = text;
@@ -97,16 +105,7 @@ public class Document {
     }
 
     public double getNumberOfHashtagsNormalizedByWords() {
-        List<String> words = getWords();
-        int totalNumberOfHashtags = 0;
-
-        for(String word : words){
-            if(word.charAt(0) == '#'){
-                totalNumberOfHashtags++;
-            }
-        }
-
-        return totalNumberOfHashtags / (double) getNumberOfWords();
+        return status.getHashtagEntities().length / (double) getNumberOfWords();
     }
 
     public int containsQuotations() {
@@ -118,21 +117,7 @@ public class Document {
     }
 
     public double getNumberOfUserMentionsNormalizedByNumberWords() {
-        List<String> words = getWords();
-        int numberOfUserMentions = 0;
-
-        for(String word : words){
-            if(isUserMention(word)){
-                numberOfUserMentions++;
-            }
-        }
-        return numberOfUserMentions / (double)getNumberOfWords();
-    }
-
-    private boolean isUserMention(String word) {
-        return word.length() != 1 &&
-                word.lastIndexOf('@') == 0;
-
+     return status.getUserMentionEntities().length / (double)getNumberOfWords();
     }
 
     public double getNumberOfSpecialCharactersNormalizedByNumberOfWords() {
@@ -195,5 +180,9 @@ public class Document {
         }
 
         return numberOfPunctuation / (double)getNumberOfSentences();
+    }
+
+    public int getNumberOfURLs() {
+        return status.getURLEntities().length;
     }
 }

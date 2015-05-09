@@ -1,7 +1,14 @@
 import org.junit.Test;
+import twitter4j.HashtagEntity;
+import twitter4j.Status;
+import twitter4j.URLEntity;
+import twitter4j.UserMentionEntity;
+
 import java.util.HashSet;
 import java.util.Set;
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class DocumentTest {
     @Test
@@ -61,8 +68,11 @@ public class DocumentTest {
 
     @Test
     public void testGetNumberOfHashtagsNormalizedByWords(){
-        Document twoHashTagsFourWords = new Document("#hashTag1 #hashTag2 two hashtags", "no author");
-        assertEquals(1/2.0, twoHashTagsFourWords.getNumberOfHashtagsNormalizedByWords(), 0.0);
+        Status twoHashtagStatus = mock(Status.class);
+        when(twoHashtagStatus.getHashtagEntities()).thenReturn(new HashtagEntity[]{mock(HashtagEntity.class), mock(HashtagEntity.class)});
+        when(twoHashtagStatus.getText()).thenReturn("#TwitterGuard for the win.");
+        Document twoHashtagDocument = new Document(twoHashtagStatus, "no author");
+        assertEquals(2/4.0, twoHashtagDocument.getNumberOfHashtagsNormalizedByWords(), 0);
     }
 
     @Test
@@ -84,9 +94,13 @@ public class DocumentTest {
 
     @Test
     public void testGetNumberOfUserMentionsNormalizedByNumberOfWords(){
-        Document oneUserMention = new Document("@Josh @Bobby@Cecily @ Josh@Howell random words", "no author");
+        Status oneUserMentionStatus = mock(Status.class);
+        when(oneUserMentionStatus.getUserMentionEntities()).thenReturn(new UserMentionEntity[]{mock(UserMentionEntity.class)});
+        when(oneUserMentionStatus.getText()).thenReturn("@Josh Howell is programming Twitter Guard");
+        Document oneUserMention = new Document(oneUserMentionStatus, "no author");
         assertEquals(1/6.0, oneUserMention.getNumberOfUserMentionsNormalizedByNumberWords(), 0);
     }
+
 
     @Test
     public void testGetNumberOfSpecialCharactersNormalizedByNumberOfWords(){
@@ -111,4 +125,15 @@ public class DocumentTest {
         Document threePunctuation = new Document("There are two sentences here. Don't deny it.", "no author");
         assertEquals(3 / 2.0, threePunctuation.getNumberOfPunctuationsNormalizedByNumberOfSentences(), 0);
     }
+
+    @Test
+    public void testGetNumberOfURLs(){
+        Status twoEntityStatus = mock(Status.class);
+        URLEntity[] twoEntities = {mock(URLEntity.class), mock(URLEntity.class)};
+        when(twoEntityStatus.getURLEntities()).thenReturn(twoEntities);
+        Document twoEntityDocument = new Document(twoEntityStatus, "URL User");
+
+        assertEquals(2, twoEntityDocument.getNumberOfURLs());
+    }
+
 }

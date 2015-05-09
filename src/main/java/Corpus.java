@@ -210,4 +210,15 @@ public class Corpus implements java.io.Serializable {
         return averageNumberOfWords;
 
     }
+
+    public double getAverageNumberOfURLsPerTweetForAuthor(String author) {
+        List<Document> documents = getDocumentsByAuthor(author);
+        int numberOfURLs = 0;
+
+        for(Document document : documents){
+            numberOfURLs += document.getNumberOfURLs();
+        }
+
+        return numberOfURLs / (double)documents.size();
+    }
 }
