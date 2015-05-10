@@ -57,6 +57,12 @@
             <version>1.9.5</version>
         </dependency>
 
+        <dependency>
+            <groupId>de.tudarmstadt.ukp.jwktl</groupId>
+            <artifactId>jwktl</artifactId>
+            <version>1.0.1</version>
+        </dependency>
+
     </dependencies>
 
 </project>

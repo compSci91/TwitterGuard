@@ -136,4 +136,22 @@ public class DocumentTest {
         assertEquals(2, twoEntityDocument.getNumberOfURLs());
     }
 
+    @Test
+    public void testGetNumberOfDictionaryWordsNormalizedByNumberOfWords(){
+        Status twoWordStatus = mock(Status.class);
+        when(twoWordStatus.getText()).thenReturn("two words lsjkdf ljskfd");
+        Document twoWordDocument = new Document(twoWordStatus, "no author");
+
+        assertEquals(2/4.0, twoWordDocument.getNumberOfDictionaryWordsNormalizedByNumberOfWords(), 0);
+    }
+
+    @Test
+    public void testGetNumberOfWordExtentionsNormalizedByNumberOfWords(){
+        Status twoWordExtensionStatus = mock(Status.class);
+        when(twoWordExtensionStatus.getText()).thenReturn("two words Hiii Byeee");
+        Document twoWordDocument = new Document(twoWordExtensionStatus, "no author");
+
+        assertEquals(2 / 4.0, twoWordDocument.getNumberOfWordExtensionsNormalizedByNumberOfWords(), 0);
+
+    }
 }

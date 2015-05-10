@@ -1,5 +1,10 @@
+import de.tudarmstadt.ukp.jwktl.JWKTL;
+import de.tudarmstadt.ukp.jwktl.api.IWiktionaryEdition;
+import de.tudarmstadt.ukp.jwktl.api.IWiktionaryEntry;
+import de.tudarmstadt.ukp.jwktl.api.IWiktionaryPage;
 import twitter4j.Status;
 
+import java.io.File;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -184,5 +189,62 @@ public class Document {
 
     public int getNumberOfURLs() {
         return status.getURLEntities().length;
+    }
+
+    public double getNumberOfDictionaryWordsNormalizedByNumberOfWords() {
+        List<String> words = getWords();
+        int numberOfDictionaryWords = 0;
+
+        for(String word : words){
+            if(isDictionaryWord(word)){
+                numberOfDictionaryWords++;
+            }
+        }
+
+        return numberOfDictionaryWords / (double)words.size();
+    }
+
+    private boolean isDictionaryWord(String word) {
+        IWiktionaryEdition wkt = JWKTL.openEdition(new File("/Users/joshuahowell/Desktop/Twitter_Guard/Wiktionary/Dictionary/"));
+        IWiktionaryPage page = wkt.getPageForWord(word);
+
+        try {
+            page.getEntries();
+            return true;
+        }catch(Exception ex){
+            return false;
+        } finally {
+            wkt.close();
+        }
+    }
+
+    public double getNumberOfWordExtensionsNormalizedByNumberOfWords() {
+        List<String> words = getWords();
+        int numberOfWordExtensions = 0;
+
+        for(String word : words){
+            if(isWordExtension(word)){
+                numberOfWordExtensions++;
+            }
+        }
+
+        return numberOfWordExtensions / (double)words.size();
+    }
+
+    private boolean isWordExtension(String word) {
+        if(isDictionaryWord(word)){
+            return false;
+        }
+
+        word = word.substring(0, word.length() - 1);
+        while(!word.equals("")){
+            if(isDictionaryWord(word)){
+                return true;
+            } else {
+                word = word.substring(0, word.length() - 1);
+            }
+        }
+
+        return false;
     }
 }
