@@ -84,7 +84,7 @@ public class DocumentTest {
     }
 
     @Test
-    public void testGetContainsQuotations(){
+    public void testContainsQuotations(){
         Document documentContainsQuotations = new Document("\"Good evening,\", said the clergymen.", "no author");
         Document documentDoesNotContainQuotations = new Document("hello goodbye", "no author");
 
