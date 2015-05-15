@@ -1,5 +1,7 @@
 package Features;
 
+import Features.Normalizers.NoNormalization;
+import Features.Normalizers.Normalizer;
 import twitter4j.Status;
 
 import java.util.ArrayList;
@@ -8,9 +10,20 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class NumberOfWordsFeature implements StatusFeature {
+    Normalizer normalizer;
+
+    public NumberOfWordsFeature(){
+        this.normalizer = new NoNormalization();
+    }
+
+    public NumberOfWordsFeature(Normalizer normalizer){
+        this.normalizer = normalizer;
+    }
+
 
     public double returnValue(Status status) {
-        return getWords(status).size();
+
+        return getWords(status).size() / normalizer.returnNormalizingValue(status);
     }
 
     private List<String> getWords(Status status){
