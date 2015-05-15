@@ -29,5 +29,4 @@ public class NumberOfDigitsFeatureTest {
         Normalizer numberOfWordsNormalizer = new NumberOfWordsNormalizer();
         assertEquals(2 / 5.0, new NumberOfDigitsFeature(numberOfWordsNormalizer).returnValue(status), 0);
     }
-
 }
