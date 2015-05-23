@@ -13,29 +13,29 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class NumberOfDictionaryWordsFeature implements StatusFeature{
+public class NumberOfWordExtensions implements StatusFeature {
     Normalizer normalizer;
 
-    public NumberOfDictionaryWordsFeature(){
+    public NumberOfWordExtensions(){
         this.normalizer = new NoNormalization();
     }
 
-    public NumberOfDictionaryWordsFeature(Normalizer normalizer){
+    public NumberOfWordExtensions(Normalizer normalizer){
         this.normalizer = normalizer;
     }
 
-
     public double returnValue(Status status) {
-        List<String> words = getWords(status);
-        int numberOfDictionaryWords = 0;
 
-        for(String word : words){
-            if(isDictionaryWord(word)){
-                numberOfDictionaryWords++;
+        List<String> words = getWords(status);
+        int numberOfWordExtensions = 0;
+
+        for (String word : words) {
+            if (isWordExtension(word)) {
+                numberOfWordExtensions++;
             }
         }
 
-        return numberOfDictionaryWords / normalizer.returnNormalizingValue(status);
+        return numberOfWordExtensions / normalizer.returnNormalizingValue(status);
     }
 
     private List<String> getWords(Status status){
@@ -47,6 +47,23 @@ public class NumberOfDictionaryWordsFeature implements StatusFeature{
         }
 
         return words;
+    }
+
+    private boolean isWordExtension(String word) {
+        if(isDictionaryWord(word)){
+            return false;
+        }
+
+        word = word.substring(0, word.length() - 1);
+        while(!word.equals("")){
+            if(isDictionaryWord(word)){
+                return true;
+            } else {
+                word = word.substring(0, word.length() - 1);
+            }
+        }
+
+        return false;
     }
 
     private boolean isDictionaryWord(String word) {

@@ -2,7 +2,7 @@ package FeatureTests;
 
 import Features.Normalizers.Normalizer;
 import Features.Normalizers.NumberOfWordsNormalizer;
-import Features.NumberOfUserMentionsFeature;
+import Features.NumberOfUserMentions;
 import org.junit.Before;
 import org.junit.Test;
 import twitter4j.Status;
@@ -12,7 +12,7 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class NumberOfUserMentionsFeatureTest {
+public class NumberOfUserMentionsTest {
     Status oneUserMentionStatus = mock(Status.class);
 
     @Before
@@ -23,13 +23,13 @@ public class NumberOfUserMentionsFeatureTest {
 
     @Test
     public void testReturnValue(){
-        assertEquals(1, new NumberOfUserMentionsFeature().returnValue(oneUserMentionStatus), 0);
+        assertEquals(1, new NumberOfUserMentions().returnValue(oneUserMentionStatus), 0);
     }
 
     @Test
     public void testReturnNormalizedValue(){
         Normalizer numberOfWordsNormalizer = new NumberOfWordsNormalizer();
-        assertEquals(1 , new NumberOfUserMentionsFeature(numberOfWordsNormalizer).returnValue(oneUserMentionStatus), 0);
+        assertEquals(1 , new NumberOfUserMentions(numberOfWordsNormalizer).returnValue(oneUserMentionStatus), 0);
     }
 
 

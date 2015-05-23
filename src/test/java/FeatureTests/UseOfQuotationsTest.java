@@ -1,7 +1,7 @@
 package FeatureTests;
 
 
-import Features.UseOfQuotationsFeature;
+import Features.UseOfQuotations;
 import org.junit.Test;
 import twitter4j.Status;
 
@@ -9,7 +9,7 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class UseOfQuotationsFeatureTest {
+public class UseOfQuotationsTest {
 
     @Test
     public void testReturnValue(){
@@ -19,7 +19,7 @@ public class UseOfQuotationsFeatureTest {
         Status statusDoesNotContainQuotations = mock(Status.class);
         when(statusDoesNotContainQuotations.getText()).thenReturn("hello goodbye");
 
-        assertEquals(1, new UseOfQuotationsFeature().returnValue(statusContainsQuotations), 0);
-        assertEquals(0, new UseOfQuotationsFeature().returnValue(statusDoesNotContainQuotations), 0);
+        assertEquals(1, new UseOfQuotations().returnValue(statusContainsQuotations), 0);
+        assertEquals(0, new UseOfQuotations().returnValue(statusDoesNotContainQuotations), 0);
     }
 }

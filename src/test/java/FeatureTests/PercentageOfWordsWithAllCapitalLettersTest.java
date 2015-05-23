@@ -1,8 +1,7 @@
 package FeatureTests;
 
-import Features.Normalizers.Normalizer;
 import Features.Normalizers.NumberOfWordsNormalizer;
-import Features.PercentageOfWordsWithAllCapitalLettersFeature;
+import Features.NumberOfWordsWithAllCapitalLettersFeature;
 import org.junit.Test;
 import twitter4j.Status;
 
@@ -16,6 +15,6 @@ public class PercentageOfWordsWithAllCapitalLettersTest {
         Status status = mock(Status.class);
         when(status.getText()).thenReturn("THERE are TWO all cap words");
 
-        assertEquals(2/6.0, new PercentageOfWordsWithAllCapitalLettersFeature(new NumberOfWordsNormalizer()).returnValue(status), 0);
+        assertEquals(2/6.0, new NumberOfWordsWithAllCapitalLettersFeature(new NumberOfWordsNormalizer()).returnValue(status), 0);
     }
 }

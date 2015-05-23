@@ -1,6 +1,6 @@
 package FeatureTests;
 
-import Features.NumberOfSentencesFeature;
+import Features.NumberOfSentences;
 import org.junit.Test;
 import twitter4j.Status;
 
@@ -8,9 +8,9 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class NumberOfSentencesFeatureTest {
+public class NumberOfSentencesTest {
     Status status = mock(Status.class);
-    NumberOfSentencesFeature numberOfSentences = new NumberOfSentencesFeature();
+    NumberOfSentences numberOfSentences = new NumberOfSentences();
 
     @Test
     public void testReturnValue(){

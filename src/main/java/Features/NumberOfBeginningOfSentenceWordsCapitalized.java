@@ -7,13 +7,13 @@ import twitter4j.Status;
 import java.util.Arrays;
 import java.util.List;
 
-public class NumberOfBeginningOfSentenceWordsCapitalizedFeature implements StatusFeature{
+public class NumberOfBeginningOfSentenceWordsCapitalized implements StatusFeature{
     Normalizer normalizer;
 
-    public NumberOfBeginningOfSentenceWordsCapitalizedFeature(){
+    public NumberOfBeginningOfSentenceWordsCapitalized(){
         this. normalizer = new NoNormalization();
     }
-    public NumberOfBeginningOfSentenceWordsCapitalizedFeature(Normalizer normalizer){
+    public NumberOfBeginningOfSentenceWordsCapitalized(Normalizer normalizer){
         this.normalizer = normalizer;
     }
 

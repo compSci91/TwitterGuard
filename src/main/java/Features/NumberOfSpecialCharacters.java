@@ -4,15 +4,15 @@ import Features.Normalizers.NoNormalization;
 import Features.Normalizers.Normalizer;
 import twitter4j.Status;
 
-public class NumberOfSpecialCharactersFeature implements StatusFeature{
+public class NumberOfSpecialCharacters implements StatusFeature{
 
     Normalizer normalizer;
 
-    public NumberOfSpecialCharactersFeature(Normalizer normalizer) {
+    public NumberOfSpecialCharacters(Normalizer normalizer) {
         this.normalizer = normalizer;
     }
 
-    public NumberOfSpecialCharactersFeature() {
+    public NumberOfSpecialCharacters() {
         this.normalizer = new NoNormalization();
     }
 

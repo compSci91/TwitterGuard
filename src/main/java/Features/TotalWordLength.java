@@ -9,21 +9,29 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class NumberOfWordsFeature implements StatusFeature {
+/**
+ * Created by joshuahowell on 5/19/15.
+ */
+public class TotalWordLength implements StatusFeature {
     Normalizer normalizer;
 
-    public NumberOfWordsFeature(){
+    public TotalWordLength(){
         this.normalizer = new NoNormalization();
     }
 
-    public NumberOfWordsFeature(Normalizer normalizer){
+    public TotalWordLength(Normalizer normalizer){
         this.normalizer = normalizer;
     }
 
-
     public double returnValue(Status status) {
+        List<String> words = getWords(status);
+        int totalWordLength = 0;
 
-        return getWords(status).size() / normalizer.returnNormalizingValue(status);
+        for(String word : words){
+            totalWordLength += word.length();
+        }
+
+        return totalWordLength / normalizer.returnNormalizingValue(status);
     }
 
     private List<String> getWords(Status status){
@@ -36,5 +44,4 @@ public class NumberOfWordsFeature implements StatusFeature {
 
         return words;
     }
-
 }

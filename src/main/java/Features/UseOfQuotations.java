@@ -2,7 +2,7 @@ package Features;
 
 import twitter4j.Status;
 
-public class UseOfQuotationsFeature implements StatusFeature {
+public class UseOfQuotations implements StatusFeature {
     public double returnValue(Status status) {
         if(status.getText().indexOf('"') == status.getText().lastIndexOf('"')){
             return 0;

@@ -4,14 +4,14 @@ import Features.Normalizers.NoNormalization;
 import Features.Normalizers.Normalizer;
 import twitter4j.Status;
 
-public class NumberOfDigitsFeature implements StatusFeature{
+public class NumberOfDigits implements StatusFeature{
     Normalizer normalizer;
 
-    public NumberOfDigitsFeature(){
+    public NumberOfDigits(){
         this.normalizer = new NoNormalization();
     }
 
-    public NumberOfDigitsFeature(Normalizer normalizer){
+    public NumberOfDigits(Normalizer normalizer){
         this.normalizer = normalizer;
     }
 

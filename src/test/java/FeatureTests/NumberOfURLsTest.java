@@ -1,6 +1,6 @@
 package FeatureTests;
 
-import Features.NumberOfURLsFeature;
+import Features.NumberOfURLs;
 import org.junit.Before;
 import org.junit.Test;
 import twitter4j.Status;
@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class NumberOfURLsFeatureTest {
+public class NumberOfURLsTest {
     Status twoEntityStatus = mock(Status.class);
 
     @Before
@@ -21,6 +21,6 @@ public class NumberOfURLsFeatureTest {
 
     @Test
     public void testReturnValue(){
-        assertEquals(2, new NumberOfURLsFeature().returnValue(twoEntityStatus), 0);
+        assertEquals(2, new NumberOfURLs().returnValue(twoEntityStatus), 0);
     }
 }

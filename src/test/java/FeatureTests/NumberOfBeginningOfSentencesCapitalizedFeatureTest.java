@@ -1,7 +1,7 @@
 package FeatureTests;
 
 import Features.Normalizers.NumberOfSentencesNormalizer;
-import Features.NumberOfBeginningOfSentenceWordsCapitalizedFeature;
+import Features.NumberOfBeginningOfSentenceWordsCapitalized;
 import org.junit.Before;
 import org.junit.Test;
 import twitter4j.Status;
@@ -20,14 +20,14 @@ public class NumberOfBeginningOfSentencesCapitalizedFeatureTest {
 
     @Test
     public void testReturnValue(){
-        assertEquals(2.0, new NumberOfBeginningOfSentenceWordsCapitalizedFeature().returnValue(status), 0);
+        assertEquals(2.0, new NumberOfBeginningOfSentenceWordsCapitalized().returnValue(status), 0);
     }
 
 
     @Test
     public void testNormalizedReturnValue(){
         NumberOfSentencesNormalizer numberOfSentencesNormalizer = new NumberOfSentencesNormalizer();
-        NumberOfBeginningOfSentenceWordsCapitalizedFeature normalizedFeature = new NumberOfBeginningOfSentenceWordsCapitalizedFeature(numberOfSentencesNormalizer);
+        NumberOfBeginningOfSentenceWordsCapitalized normalizedFeature = new NumberOfBeginningOfSentenceWordsCapitalized(numberOfSentencesNormalizer);
 
         assertEquals(2/5.0, normalizedFeature.returnValue(status), 0);
     }

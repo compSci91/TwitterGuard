@@ -1,5 +1,6 @@
 package Features;
 
+import Features.Normalizers.NoNormalization;
 import Features.Normalizers.Normalizer;
 import twitter4j.Status;
 
@@ -8,10 +9,14 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class PercentageOfWordsWithAllCapitalLettersFeature implements StatusFeature {
+public class NumberOfWordsWithAllCapitalLettersFeature implements StatusFeature {
     Normalizer normalizer;
 
-    public PercentageOfWordsWithAllCapitalLettersFeature(Normalizer normalizer){
+    public NumberOfWordsWithAllCapitalLettersFeature(){
+        this.normalizer = new NoNormalization();
+    }
+
+    public NumberOfWordsWithAllCapitalLettersFeature(Normalizer normalizer){
         this.normalizer = normalizer;
     }
 

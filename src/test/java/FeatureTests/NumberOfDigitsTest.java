@@ -2,32 +2,31 @@ package FeatureTests;
 
 import Features.Normalizers.Normalizer;
 import Features.Normalizers.NumberOfWordsNormalizer;
-import Features.NumberOfSpecialCharactersFeature;
+import Features.NumberOfDigits;
 import org.junit.Before;
 import org.junit.Test;
 import twitter4j.Status;
+import static org.mockito.Mockito.when;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
-public class NumberOfSpecialCharactersFeatureTest {
-    Status twoSpecialCharacters = mock(Status.class);
+public class NumberOfDigitsTest {
+    Status status = mock(Status.class);
 
     @Before
     public void setUp(){
-        when(twoSpecialCharacters.getText()).thenReturn("↪ Ⓐ three random words");
+        when(status.getText()).thenReturn("There are 2.0 digits here.");
     }
 
     @Test
     public void testReturnValue(){
-        assertEquals(2, new NumberOfSpecialCharactersFeature().returnValue(twoSpecialCharacters), 0);
+        assertEquals(2, new NumberOfDigits().returnValue(status), 0);
     }
 
     @Test
     public void testReturnNormalizedValue(){
         Normalizer numberOfWordsNormalizer = new NumberOfWordsNormalizer();
-        assertEquals(2, new NumberOfSpecialCharactersFeature(numberOfWordsNormalizer).returnValue(twoSpecialCharacters), 0);
-
+        assertEquals(2 / 5.0, new NumberOfDigits(numberOfWordsNormalizer).returnValue(status), 0);
     }
 }
