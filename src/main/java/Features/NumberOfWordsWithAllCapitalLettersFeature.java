@@ -9,9 +9,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class NumberOfWordsWithAllCapitalLettersFeature implements StatusFeature {
-    Normalizer normalizer;
-
+public class NumberOfWordsWithAllCapitalLettersFeature extends StatusFeature {
     public NumberOfWordsWithAllCapitalLettersFeature(){
         this.normalizer = new NoNormalization();
     }

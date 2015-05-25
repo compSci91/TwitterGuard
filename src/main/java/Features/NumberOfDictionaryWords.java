@@ -13,9 +13,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class NumberOfDictionaryWords implements StatusFeature{
-    Normalizer normalizer;
-
+public class NumberOfDictionaryWords extends StatusFeature{
     public NumberOfDictionaryWords(){
         this.normalizer = new NoNormalization();
     }

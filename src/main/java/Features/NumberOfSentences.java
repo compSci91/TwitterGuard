@@ -5,7 +5,7 @@ import twitter4j.Status;
 import java.util.Arrays;
 import java.util.List;
 
-public class NumberOfSentences implements StatusFeature {
+public class NumberOfSentences extends StatusFeature {
     public double returnValue(Status status) {
         return getSentences(status).size();
     }

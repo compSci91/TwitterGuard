@@ -4,9 +4,7 @@ import Features.Normalizers.NoNormalization;
 import Features.Normalizers.Normalizer;
 import twitter4j.Status;
 
-public class NumberOfDigits implements StatusFeature{
-    Normalizer normalizer;
-
+public class NumberOfDigits extends StatusFeature{
     public NumberOfDigits(){
         this.normalizer = new NoNormalization();
     }

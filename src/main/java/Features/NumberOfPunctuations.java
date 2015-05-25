@@ -7,9 +7,7 @@ import twitter4j.Status;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class NumberOfPunctuations implements StatusFeature {
-    Normalizer normalizer;
-
+public class NumberOfPunctuations extends StatusFeature {
     public NumberOfPunctuations(){
         this.normalizer = new NoNormalization();
     }

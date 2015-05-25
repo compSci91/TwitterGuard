@@ -9,9 +9,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class NumberOfWords implements StatusFeature {
-    Normalizer normalizer;
-
+public class NumberOfWords extends StatusFeature {
     public NumberOfWords(){
         this.normalizer = new NoNormalization();
     }
@@ -35,21 +33,5 @@ public class NumberOfWords implements StatusFeature {
         }
 
         return words;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        NumberOfWords that = (NumberOfWords) o;
-
-        return !(normalizer != null ? !normalizer.equals(that.normalizer) : that.normalizer != null);
-
-    }
-
-    @Override
-    public int hashCode() {
-        return normalizer != null ? normalizer.hashCode() : 0;
     }
 }

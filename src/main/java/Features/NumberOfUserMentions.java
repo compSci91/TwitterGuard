@@ -4,7 +4,7 @@ import Features.Normalizers.NoNormalization;
 import Features.Normalizers.Normalizer;
 import twitter4j.Status;
 
-public class NumberOfUserMentions implements StatusFeature{
+public class NumberOfUserMentions extends StatusFeature{
     Normalizer normalizer;
 
     public NumberOfUserMentions(){

@@ -9,12 +9,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created by joshuahowell on 5/19/15.
- */
-public class TotalWordLength implements StatusFeature {
-    Normalizer normalizer;
 
+public class TotalWordLength extends StatusFeature {
     public TotalWordLength(){
         this.normalizer = new NoNormalization();
     }

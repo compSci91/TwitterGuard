@@ -13,9 +13,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class NumberOfWordExtensions implements StatusFeature {
-    Normalizer normalizer;
-
+public class NumberOfWordExtensions extends StatusFeature {
     public NumberOfWordExtensions(){
         this.normalizer = new NoNormalization();
     }
