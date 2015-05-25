@@ -1,3 +1,5 @@
+package Corpus;
+
 import twitter4j.Status;
 
 import Features.*;
@@ -44,5 +46,9 @@ public class Document {
         for(StatusFeature statusFeature : statusFeatures){
             documentFeatures.put(statusFeature, new Double(statusFeature.returnValue(status)));
         }
+    }
+
+    public double getValueForFeature(StatusFeature statusFeature){
+        return documentFeatures.get(statusFeature);
     }
 }

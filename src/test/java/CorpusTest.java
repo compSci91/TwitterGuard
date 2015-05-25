@@ -18,27 +18,27 @@ import static org.junit.Assert.*;
 public class CorpusTest {
 
 //    private Corpus corpus;
-//    private Document knowEverything;
-//    private Document afterLife;
-//    private Document helloGoodbye;
+//    private Corpus.Document knowEverything;
+//    private Corpus.Document afterLife;
+//    private Corpus.Document helloGoodbye;
 //
-//    private Document testDocument1;
-//    private Document testDocument2;
+//    private Corpus.Document testDocument1;
+//    private Corpus.Document testDocument2;
 //
 //    @Before
 //    public void setUp(){
 //        corpus = new Corpus();
 //        String quote = "People who think they know everything are a great annoyance to those of us who do.";
-//        knowEverything = new Document(quote, "Isaac Asimov");
+//        knowEverything = new Corpus.Document(quote, "Isaac Asimov");
 //
 //        String another_quote = "I don't believe in an afterlife, so I don't have to spend my whole life fearing hell, or fearing heaven even more. For whatever the tortures of hell, I think the boredom of heaven would be even worse.";
-//        afterLife = new Document(another_quote, "Isaac Asimov");
+//        afterLife = new Corpus.Document(another_quote, "Isaac Asimov");
 //
-//        helloGoodbye = new Document("I don't know why you say goodbye, I say hello hello hello", "The Beatles");
+//        helloGoodbye = new Corpus.Document("I don't know why you say goodbye, I say hello hello hello", "The Beatles");
 //
 //
-//        testDocument1 = mock(Document.class);
-//        testDocument2 = mock(Document.class);
+//        testDocument1 = mock(Corpus.Document.class);
+//        testDocument2 = mock(Corpus.Document.class);
 //
 //        when(testDocument1.getVocabulary()).thenReturn(new HashSet<String>(Arrays.asList("hello", "goodbye")));
 //        when(testDocument2.getVocabulary()).thenReturn(new HashSet<String>(Arrays.asList("goodbye", "friend")));
@@ -107,7 +107,7 @@ public class CorpusTest {
 //
 //    @Test
 //    public void whosWho(){
-//        corpus.addDocument(new Document("Who's who.", "Isaac Asimov"));
+//        corpus.addDocument(new Corpus.Document("Who's who.", "Isaac Asimov"));
 //
 //        int whoTermFrequency = corpus.termFrequencyForAuthor("who", "Isaac Asimov");
 //
@@ -266,8 +266,8 @@ public class CorpusTest {
 //            System.out.println("IOException!");
 //        }
 //
-//        expectedCorpus.addDocument(new Document(status1, author));
-//        expectedCorpus.addDocument(new Document(status2, author));
+//        expectedCorpus.addDocument(new Corpus.Document(status1, author));
+//        expectedCorpus.addDocument(new Corpus.Document(status2, author));
 //
 //        assertEquals(actualCorpus, expectedCorpus);
 //    }
@@ -278,18 +278,18 @@ public class CorpusTest {
 //        when(twoEntityStatus.getText()).thenReturn("");
 //        URLEntity[] twoEntities = {mock(URLEntity.class), mock(URLEntity.class)};
 //        when(twoEntityStatus.getURLEntities()).thenReturn(twoEntities);
-//        Document twoEntityDocument = new Document(twoEntityStatus, "URL User");
+//        Corpus.Document twoEntityDocument = new Corpus.Document(twoEntityStatus, "URL User");
 //
 //        Status threeEntityStatus = mock(Status.class);
 //        when(threeEntityStatus.getText()).thenReturn("");
 //        URLEntity[] threeEntities = {mock(URLEntity.class), mock(URLEntity.class), mock(URLEntity.class)};
 //        when(threeEntityStatus.getURLEntities()).thenReturn(threeEntities);
-//        Document threeEntityDocument = new Document(threeEntityStatus, "URL User");
+//        Corpus.Document threeEntityDocument = new Corpus.Document(threeEntityStatus, "URL User");
 //
 //        Status zeroEntityStatus = mock(Status.class);
 //        when(zeroEntityStatus.getText()).thenReturn("");
 //        when(zeroEntityStatus.getURLEntities()).thenReturn(new URLEntity[]{});
-//        Document zeroEntityDocument = new Document(zeroEntityStatus, "URL User");
+//        Corpus.Document zeroEntityDocument = new Corpus.Document(zeroEntityStatus, "URL User");
 //
 //        corpus.addDocument(twoEntityDocument);
 //        corpus.addDocument(threeEntityDocument);
