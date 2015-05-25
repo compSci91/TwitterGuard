@@ -2,6 +2,12 @@ package Features.Normalizers;
 
 import twitter4j.Status;
 
-public interface  Normalizer {
-    double returnNormalizingValue(Status status);
+public abstract class  Normalizer {
+    public abstract double returnNormalizingValue(Status status);
+
+    @Override
+    public boolean equals(Object o){
+        return getClass() == o.getClass();
+    }
+
 }

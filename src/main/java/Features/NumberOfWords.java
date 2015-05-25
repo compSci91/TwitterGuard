@@ -37,4 +37,19 @@ public class NumberOfWords implements StatusFeature {
         return words;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        NumberOfWords that = (NumberOfWords) o;
+
+        return !(normalizer != null ? !normalizer.equals(that.normalizer) : that.normalizer != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return normalizer != null ? normalizer.hashCode() : 0;
+    }
 }

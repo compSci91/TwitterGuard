@@ -3,46 +3,46 @@ import twitter4j.Status;
 import Features.*;
 import Features.Normalizers.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class Document {
+
+    private Map<StatusFeature, Double> documentFeatures;
+    List<StatusFeature> statusFeatures;
 
     private Status status;
     public final String AUTHOR;
-    public final double NUMBER_OF_WORDS;
-    public final double NUMBER_OF_SENTENCES;
-    public final double AVERAGE_NUMBER_OF_WORDS_PER_SENTENCE;
-    public final double USE_OF_QUOTATIONS;
-    public final double PERCENTAGE_OF_WORDS_WITH_ALL_CAPITAL_LETTERS;
-    public final double NUMBER_OF_SPECIAL_CHARACTERS_NORMALIZED_BY_NUMBER_OF_WORDS;
-    public final double NUMBER_OF_BEGINNING_OF_SENTENCE_WORDS_NORMALIZED_BY_NUMBER_OF_SENTENCES;
-    public final double NUMBER_OF_DIGITS_NORMALIZED_BY_NUMBER_OF_WORDS;
-    public final double NUMBER_OF_PUNCTUATIONS_PER_SENTENCE;
-    public final double NUMBER_OF_DICTIONARY_WORDS_NORMALIZED_BY_NUMBER_OF_WORDS;
-    public final double AVERAGE_WORD_LENGTH;
-    public final double NUMBER_OF_WORD_EXTENSIONS_NORMALIZED_BY_NUMBER_OF_WORDS;
-    public final double NUMBER_OF_HASHTAGS_NORMALIZED_BY_NUMBER_OF_WORDS;
-    public final double NUMBER_OF_USER_MENTIONS_NORMALIZED_BY_NUMBER_OF_WORDS;
-    public final double NUMBER_OF_URLS;
 
     public Document(Status status, String author){
+        documentFeatures = new HashMap<StatusFeature, Double>();
+        statusFeatures = new ArrayList<StatusFeature>();
         Normalizer numberOfSentencesNormalizer = new NumberOfSentencesNormalizer();
         Normalizer numberOfWordsNormalizer = new NumberOfWordsNormalizer();
 
         this.status = status;
         AUTHOR = author;
-        NUMBER_OF_WORDS = new NumberOfWords().returnValue(status);
-        NUMBER_OF_SENTENCES = new NumberOfSentences().returnValue(status);
-        AVERAGE_NUMBER_OF_WORDS_PER_SENTENCE = new NumberOfWords(numberOfSentencesNormalizer).returnValue(status);
-        USE_OF_QUOTATIONS = new UseOfQuotations().returnValue(status);
-        PERCENTAGE_OF_WORDS_WITH_ALL_CAPITAL_LETTERS = new NumberOfWordsWithAllCapitalLettersFeature(numberOfWordsNormalizer).returnValue(status);
-        NUMBER_OF_SPECIAL_CHARACTERS_NORMALIZED_BY_NUMBER_OF_WORDS = new NumberOfSpecialCharacters(numberOfWordsNormalizer).returnValue(status);
-        NUMBER_OF_BEGINNING_OF_SENTENCE_WORDS_NORMALIZED_BY_NUMBER_OF_SENTENCES = new NumberOfBeginningOfSentenceWordsCapitalized(numberOfWordsNormalizer).returnValue(status);
-        NUMBER_OF_DIGITS_NORMALIZED_BY_NUMBER_OF_WORDS = new NumberOfDigits(numberOfWordsNormalizer).returnValue(status);
-        NUMBER_OF_PUNCTUATIONS_PER_SENTENCE = new NumberOfPunctuations(numberOfSentencesNormalizer).returnValue(status);
-        NUMBER_OF_DICTIONARY_WORDS_NORMALIZED_BY_NUMBER_OF_WORDS = new NumberOfDictionaryWords(numberOfWordsNormalizer).returnValue(status);
-        AVERAGE_WORD_LENGTH = new TotalWordLength(numberOfWordsNormalizer).returnValue(status);
-        NUMBER_OF_WORD_EXTENSIONS_NORMALIZED_BY_NUMBER_OF_WORDS = new NumberOfWordExtensions(numberOfWordsNormalizer).returnValue(status);
-        NUMBER_OF_HASHTAGS_NORMALIZED_BY_NUMBER_OF_WORDS  = new NumberOfHashtags(numberOfWordsNormalizer).returnValue(status);
-        NUMBER_OF_USER_MENTIONS_NORMALIZED_BY_NUMBER_OF_WORDS = new NumberOfUserMentions(numberOfWordsNormalizer).returnValue(status);
-        NUMBER_OF_URLS = new NumberOfURLs().returnValue(status);
+
+        statusFeatures.add(new NumberOfWords());
+        statusFeatures.add(new NumberOfSentences());
+        statusFeatures.add(new NumberOfWords(numberOfSentencesNormalizer));
+        statusFeatures.add(new UseOfQuotations());
+        statusFeatures.add(new NumberOfWordsWithAllCapitalLettersFeature(numberOfWordsNormalizer));
+        statusFeatures.add(new NumberOfSpecialCharacters(numberOfWordsNormalizer));
+        statusFeatures.add(new NumberOfBeginningOfSentenceWordsCapitalized(numberOfWordsNormalizer));
+        statusFeatures.add(new NumberOfDigits(numberOfWordsNormalizer));
+        statusFeatures.add(new NumberOfPunctuations(numberOfSentencesNormalizer));
+        statusFeatures.add(new NumberOfDictionaryWords(numberOfWordsNormalizer));
+        statusFeatures.add(new TotalWordLength(numberOfWordsNormalizer));
+        statusFeatures.add(new NumberOfWordExtensions(numberOfWordsNormalizer));
+        statusFeatures.add(new NumberOfHashtags(numberOfWordsNormalizer));
+        statusFeatures.add(new NumberOfUserMentions(numberOfWordsNormalizer));
+        statusFeatures.add(new NumberOfURLs());
+
+        for(StatusFeature statusFeature : statusFeatures){
+            documentFeatures.put(statusFeature, new Double(statusFeature.returnValue(status)));
+        }
     }
 }

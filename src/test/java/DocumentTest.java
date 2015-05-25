@@ -1,3 +1,6 @@
+import Features.Normalizers.Normalizer;
+import Features.Normalizers.NumberOfSentencesNormalizer;
+import Features.NumberOfWords;
 import org.junit.Test;
 import twitter4j.HashtagEntity;
 import twitter4j.Status;
@@ -11,4 +14,5 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class DocumentTest {
+
 }

@@ -8,7 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public class NumberOfWordsNormalizer implements Normalizer {
+public class NumberOfWordsNormalizer extends Normalizer {
 
     public double returnNormalizingValue(Status status) {
         return getWords(status).size();
