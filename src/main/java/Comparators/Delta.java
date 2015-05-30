@@ -1,26 +1,19 @@
 package Comparators;
 
 import Features.StatusFeature;
-
-
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import Corpus.*;
 
-public class Delta implements Comparator<Document> {
-    Corpus corpus;
-    Document queryDocument;
+import java.util.Comparator;
+import java.util.List;
 
+
+public class Delta extends ZScoreDistance implements Comparator<Document>  {
     public Delta(Corpus corpus, Document queryDocument){
-        this.corpus = corpus;
-        this.queryDocument = queryDocument;
+        super(corpus, queryDocument);
     }
 
     public int compare(Document document1, Document document2) {
-        return (int) (delta(document2) - delta(document2));
+        return (int) (delta(document1) - delta(document2));
     }
 
     private double delta(Document document){
@@ -32,9 +25,5 @@ public class Delta implements Comparator<Document> {
         }
 
         return zScoreTotal / statusFeatures.size();
-    }
-
-    private double getZScore(StatusFeature statusFeature, Document document){
-        return (document.getValueForFeature(statusFeature) - corpus.getMean(statusFeature)) / corpus.getStandardDeviation(statusFeature);
     }
 }
