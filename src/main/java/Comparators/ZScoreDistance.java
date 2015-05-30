@@ -13,6 +13,6 @@ public abstract class ZScoreDistance {
     }
 
     public double getZScore(StatusFeature statusFeature, Document document){
-        return (document.getValueForFeature(statusFeature) - corpus.getMean(statusFeature)) / corpus.getStandardDeviation(statusFeature);
+       return (document.getValueForFeature(statusFeature) - corpus.getMean(statusFeature)) / corpus.getStandardDeviation(statusFeature);
     }
 }
