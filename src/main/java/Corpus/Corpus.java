@@ -1,24 +1,58 @@
 package Corpus;
 
-import twitter4j.Status;
-
-import java.io.*;
 import java.util.*;
-import Corpus.AuthorProfile;
+import Features.StatusFeature;
 
 public class Corpus implements java.io.Serializable {
-    private Map<String, AuthorProfile> corpus = new HashMap<String, AuthorProfile>();
 
-    private List<Document> allDocuments;
+    List<Document> documents;
+    Map<StatusFeature, Double> means;
+    Map<StatusFeature, Double> standardDeviations;
 
-    public List<Document> getAllDocuments() {
-        List<Document> allDocuments = new ArrayList<Document>();
+    public Corpus(List<Document> documents){
+        this.documents = documents;
+        means = getMeans();
+        standardDeviations = getStandardDeviations();
+    }
 
-        for (Map.Entry<String, AuthorProfile> entry : corpus.entrySet()){
-            allDocuments.addAll(entry.getValue().getDocuments());
+    private Map<StatusFeature, Double> getMeans() {
+        Map<StatusFeature, Double> means = new HashMap<StatusFeature, Double>();
+        List<StatusFeature> statusFeatures = documents.get(0).getStatusFeatures();
+
+        for(StatusFeature statusFeature : statusFeatures){
+            double featureTotal = 0;
+            for(Document document : documents){
+                featureTotal += document.getValueForFeature(statusFeature);
+            }
+
+            means.put(statusFeature, featureTotal / documents.size());
         }
 
-        return allDocuments;
+        return means;
+    }
+
+    private Map<StatusFeature, Double> getStandardDeviations(){
+        Map<StatusFeature, Double> standardDeviations = new HashMap<StatusFeature, Double>();
+        List<StatusFeature> statusFeatures = documents.get(0).getStatusFeatures();
+
+        for(StatusFeature statusFeature : statusFeatures){
+            double total = 0;
+            for(Document document : documents){
+                total += Math.pow(document.getValueForFeature(statusFeature) - means.get(statusFeature), 2);
+            }
+
+            standardDeviations.put(statusFeature, Math.sqrt(total / documents.size()));
+        }
+
+        return standardDeviations;
+    }
+
+    public double getMean(StatusFeature statusFeature){
+        return means.get(statusFeature);
+    }
+
+    public double getStandardDeviation(StatusFeature statusFeature){
+        return standardDeviations.get(statusFeature);
     }
 
 
