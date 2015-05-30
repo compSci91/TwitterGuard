@@ -32,7 +32,7 @@ public class Delta implements Comparator<Document> {
         double zScoreTotal = 0;
 
         for(StatusFeature statusFeature : statusFeatures){
-            zScoreTotal += (getZScore(statusFeature, queryDocument) - getZScore(statusFeature, document));
+            zScoreTotal += Math.abs((getZScore(statusFeature, queryDocument) - getZScore(statusFeature, document)));
         }
 
         return zScoreTotal / statusFeatures.size();
@@ -71,5 +71,4 @@ public class Delta implements Comparator<Document> {
         }
 
     }
-
 }
