@@ -17,28 +17,28 @@ import static org.junit.Assert.*;
 
 public class CorpusTest {
 
-//    private Corpus corpus;
-//    private Corpus.Document knowEverything;
-//    private Corpus.Document afterLife;
-//    private Corpus.Document helloGoodbye;
+//    private Corpus.Corpus corpus;
+//    private Corpus.Corpus.Document knowEverything;
+//    private Corpus.Corpus.Document afterLife;
+//    private Corpus.Corpus.Document helloGoodbye;
 //
-//    private Corpus.Document testDocument1;
-//    private Corpus.Document testDocument2;
+//    private Corpus.Corpus.Document testDocument1;
+//    private Corpus.Corpus.Document testDocument2;
 //
 //    @Before
 //    public void setUp(){
-//        corpus = new Corpus();
+//        corpus = new Corpus.Corpus();
 //        String quote = "People who think they know everything are a great annoyance to those of us who do.";
-//        knowEverything = new Corpus.Document(quote, "Isaac Asimov");
+//        knowEverything = new Corpus.Corpus.Document(quote, "Isaac Asimov");
 //
 //        String another_quote = "I don't believe in an afterlife, so I don't have to spend my whole life fearing hell, or fearing heaven even more. For whatever the tortures of hell, I think the boredom of heaven would be even worse.";
-//        afterLife = new Corpus.Document(another_quote, "Isaac Asimov");
+//        afterLife = new Corpus.Corpus.Document(another_quote, "Isaac Asimov");
 //
-//        helloGoodbye = new Corpus.Document("I don't know why you say goodbye, I say hello hello hello", "The Beatles");
+//        helloGoodbye = new Corpus.Corpus.Document("I don't know why you say goodbye, I say hello hello hello", "The Beatles");
 //
 //
-//        testDocument1 = mock(Corpus.Document.class);
-//        testDocument2 = mock(Corpus.Document.class);
+//        testDocument1 = mock(Corpus.Corpus.Document.class);
+//        testDocument2 = mock(Corpus.Corpus.Document.class);
 //
 //        when(testDocument1.getVocabulary()).thenReturn(new HashSet<String>(Arrays.asList("hello", "goodbye")));
 //        when(testDocument2.getVocabulary()).thenReturn(new HashSet<String>(Arrays.asList("goodbye", "friend")));
@@ -58,13 +58,13 @@ public class CorpusTest {
 //
 //    @Test
 //    public void testFile(){
-//        File rapeThreats = new File("/Users/joshuahowell/Desktop/Twitter Guard/Corpus/Rape Threats.txt");
+//        File rapeThreats = new File("/Users/joshuahowell/Desktop/Twitter Guard/Corpus.Corpus/Rape Threats.txt");
 //        assertEquals("Rape Threats.txt", rapeThreats.getName());
 //    }
 //
 //    @Test
 //    public void testDirectory(){
-//        File normalTweetsDirectory = new File("/Users/joshuahowell/Desktop/Twitter_Guard/Corpus/Normal_Tweets/");
+//        File normalTweetsDirectory = new File("/Users/joshuahowell/Desktop/Twitter_Guard/Corpus.Corpus/Normal_Tweets/");
 //        assertTrue(normalTweetsDirectory.isDirectory());
 //        assertEquals(normalTweetsDirectory.getName(), "Normal_Tweets");
 //        File[] statuses = normalTweetsDirectory.listFiles(new IgnoreHiddenFilesFilter());
@@ -107,7 +107,7 @@ public class CorpusTest {
 //
 //    @Test
 //    public void whosWho(){
-//        corpus.addDocument(new Corpus.Document("Who's who.", "Isaac Asimov"));
+//        corpus.addDocument(new Corpus.Corpus.Document("Who's who.", "Isaac Asimov"));
 //
 //        int whoTermFrequency = corpus.termFrequencyForAuthor("who", "Isaac Asimov");
 //
@@ -233,7 +233,7 @@ public class CorpusTest {
 //        corpus.addDocument(knowEverything);
 //        corpus.addDocument(afterLife);
 //
-//        Corpus asimovCorpus = new Corpus();
+//        Corpus.Corpus asimovCorpus = new Corpus.Corpus();
 //        asimovCorpus.generateAuthorandDocumentsFromTextFile("/Users/joshuahowell/Desktop/Twitter_Guard/app/src/test/java/Isaac Asimov.txt");
 //
 //        assertEquals(corpus, asimovCorpus);
@@ -241,13 +241,13 @@ public class CorpusTest {
 //
 //    @Test
 //    public void testGenerateAuthorFromDirectory(){
-//        Corpus actualCorpus = new Corpus();
-//        actualCorpus.generateAuthorFromDirectory(new File("/Users/joshuahowell/Desktop/Twitter_Guard/Corpus/Test_Tweets/"));
+//        Corpus.Corpus actualCorpus = new Corpus.Corpus();
+//        actualCorpus.generateAuthorFromDirectory(new File("/Users/joshuahowell/Desktop/Twitter_Guard/Corpus.Corpus/Test_Tweets/"));
 //
-//        Corpus expectedCorpus = new Corpus();
+//        Corpus.Corpus expectedCorpus = new Corpus.Corpus();
 //        String author = "Test_Tweets";
-//        File statusFile1 = new File("/Users/joshuahowell/Desktop/Twitter_Guard/Corpus/Test_Tweets/status1.ser");
-//        File statusFile2 = new File("/Users/joshuahowell/Desktop/Twitter_Guard/Corpus/Test_Tweets/status2.ser");
+//        File statusFile1 = new File("/Users/joshuahowell/Desktop/Twitter_Guard/Corpus.Corpus/Test_Tweets/status1.ser");
+//        File statusFile2 = new File("/Users/joshuahowell/Desktop/Twitter_Guard/Corpus.Corpus/Test_Tweets/status2.ser");
 //
 //        String status1 = null, status2 = null;
 //
@@ -266,8 +266,8 @@ public class CorpusTest {
 //            System.out.println("IOException!");
 //        }
 //
-//        expectedCorpus.addDocument(new Corpus.Document(status1, author));
-//        expectedCorpus.addDocument(new Corpus.Document(status2, author));
+//        expectedCorpus.addDocument(new Corpus.Corpus.Document(status1, author));
+//        expectedCorpus.addDocument(new Corpus.Corpus.Document(status2, author));
 //
 //        assertEquals(actualCorpus, expectedCorpus);
 //    }
@@ -278,18 +278,18 @@ public class CorpusTest {
 //        when(twoEntityStatus.getText()).thenReturn("");
 //        URLEntity[] twoEntities = {mock(URLEntity.class), mock(URLEntity.class)};
 //        when(twoEntityStatus.getURLEntities()).thenReturn(twoEntities);
-//        Corpus.Document twoEntityDocument = new Corpus.Document(twoEntityStatus, "URL User");
+//        Corpus.Corpus.Document twoEntityDocument = new Corpus.Corpus.Document(twoEntityStatus, "URL User");
 //
 //        Status threeEntityStatus = mock(Status.class);
 //        when(threeEntityStatus.getText()).thenReturn("");
 //        URLEntity[] threeEntities = {mock(URLEntity.class), mock(URLEntity.class), mock(URLEntity.class)};
 //        when(threeEntityStatus.getURLEntities()).thenReturn(threeEntities);
-//        Corpus.Document threeEntityDocument = new Corpus.Document(threeEntityStatus, "URL User");
+//        Corpus.Corpus.Document threeEntityDocument = new Corpus.Corpus.Document(threeEntityStatus, "URL User");
 //
 //        Status zeroEntityStatus = mock(Status.class);
 //        when(zeroEntityStatus.getText()).thenReturn("");
 //        when(zeroEntityStatus.getURLEntities()).thenReturn(new URLEntity[]{});
-//        Corpus.Document zeroEntityDocument = new Corpus.Document(zeroEntityStatus, "URL User");
+//        Corpus.Corpus.Document zeroEntityDocument = new Corpus.Corpus.Document(zeroEntityStatus, "URL User");
 //
 //        corpus.addDocument(twoEntityDocument);
 //        corpus.addDocument(threeEntityDocument);

@@ -51,4 +51,6 @@ public class Document {
     public double getValueForFeature(StatusFeature statusFeature){
         return documentFeatures.get(statusFeature);
     }
+
+    public List<StatusFeature> getStatusFeatures(){ return statusFeatures; }
 }

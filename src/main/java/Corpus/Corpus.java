@@ -1,15 +1,33 @@
+package Corpus;
+
 import twitter4j.Status;
 
 import java.io.*;
 import java.util.*;
+import Corpus.AuthorProfile;
 
 public class Corpus implements java.io.Serializable {
-//   private HashMap<String, ArrayList<Corpus.Document>> corpus;
+    private Map<String, AuthorProfile> corpus = new HashMap<String, AuthorProfile>();
+
+    private List<Document> allDocuments;
+
+    public List<Document> getAllDocuments() {
+        List<Document> allDocuments = new ArrayList<Document>();
+
+        for (Map.Entry<String, AuthorProfile> entry : corpus.entrySet()){
+            allDocuments.addAll(entry.getValue().getDocuments());
+        }
+
+        return allDocuments;
+    }
+
+
+//   private HashMap<String, ArrayList<Corpus.Corpus.Document>> corpus;
 //   private Set<String> completeVocabulary;
 //   public List<String> statusTexts;
 //
-//    public Corpus(){
-//       corpus = new HashMap<String, ArrayList<Corpus.Document>>();
+//    public Corpus.Corpus(){
+//       corpus = new HashMap<String, ArrayList<Corpus.Corpus.Document>>();
 //       completeVocabulary = new HashSet<String>();
 //        statusTexts = new ArrayList<String>();
 //    }
@@ -32,7 +50,7 @@ public class Corpus implements java.io.Serializable {
 //
 //        while(reader.hasNextLine()){
 //            String text = reader.nextLine();
-//            Corpus.Document document = new Corpus.Document(text, author);
+//            Corpus.Corpus.Document document = new Corpus.Corpus.Document(text, author);
 //            addDocument(document);
 //        }
 //    }
@@ -50,26 +68,26 @@ public class Corpus implements java.io.Serializable {
 //        return completeVocabulary;
 //    }
 //
-//    public void addDocument(Corpus.Document document){
+//    public void addDocument(Corpus.Corpus.Document document){
 //        addVocabulary(document);
 //        addDocumentToCorpus(document);
 //    }
 //
-//    private void addDocumentToCorpus(Corpus.Document document) {
+//    private void addDocumentToCorpus(Corpus.Corpus.Document document) {
 //        String author = document.getAuthor();
 //
 //        if(corpus.containsKey(author)){
-//            ArrayList<Corpus.Document> authorsDocuments = corpus.get(author);
+//            ArrayList<Corpus.Corpus.Document> authorsDocuments = corpus.get(author);
 //            authorsDocuments.add(document);
 //            corpus.put(author, authorsDocuments);
 //        } else{
-//            ArrayList<Corpus.Document> newAuthor = new ArrayList<Corpus.Document>();
+//            ArrayList<Corpus.Corpus.Document> newAuthor = new ArrayList<Corpus.Corpus.Document>();
 //            newAuthor.add(document);
 //            corpus.put(author, newAuthor);
 //        }
 //    }
 //
-//    private void addVocabulary(Corpus.Document document){
+//    private void addVocabulary(Corpus.Corpus.Document document){
 //        completeVocabulary.addAll(document.getVocabulary());
 //    }
 //
@@ -99,9 +117,9 @@ public class Corpus implements java.io.Serializable {
 //
 //    public int termFrequencyForAuthor(String term, String author){
 //        int termFrequency = 0;
-//        ArrayList<Corpus.Document> authorsDocuments = corpus.get(author);
+//        ArrayList<Corpus.Corpus.Document> authorsDocuments = corpus.get(author);
 //
-//        for(Corpus.Document document : authorsDocuments){
+//        for(Corpus.Corpus.Document document : authorsDocuments){
 //            termFrequency += document.getTermFrequency(term);
 //        }
 //
@@ -110,9 +128,9 @@ public class Corpus implements java.io.Serializable {
 //
 //    public int numberOfWordTokensForAuthor(String author){
 //        int numberOfWords = 0;
-//        ArrayList<Corpus.Document> authorsDocuments = corpus.get(author);
+//        ArrayList<Corpus.Corpus.Document> authorsDocuments = corpus.get(author);
 //
-//        for(Corpus.Document document : authorsDocuments){
+//        for(Corpus.Corpus.Document document : authorsDocuments){
 //            numberOfWords += document.getNumberOfWords();
 //        }
 //
@@ -147,16 +165,16 @@ public class Corpus implements java.io.Serializable {
 //
 //    private Set<String> getAuthorsVocabulary(String author) {
 //        Set<String> authorsVocabulary = new HashSet<String>();
-//        List<Corpus.Document> authorsDocuments = corpus.get(author);
+//        List<Corpus.Corpus.Document> authorsDocuments = corpus.get(author);
 //
-//        for(Corpus.Document document : authorsDocuments){
+//        for(Corpus.Corpus.Document document : authorsDocuments){
 //            authorsVocabulary.addAll(document.getVocabulary());
 //        }
 //
 //        return authorsVocabulary;
 //    }
 //
-//    public List<Corpus.Document> getDocumentsByAuthor(String author){
+//    public List<Corpus.Corpus.Document> getDocumentsByAuthor(String author){
 //        return corpus.get(author);
 //    }
 //
@@ -178,7 +196,7 @@ public class Corpus implements java.io.Serializable {
 //                System.out.println("IOException!");
 //            }
 //
-//            addDocument(new Corpus.Document(statusText, author));
+//            addDocument(new Corpus.Corpus.Document(statusText, author));
 //        }
 //    }
 //
@@ -187,7 +205,7 @@ public class Corpus implements java.io.Serializable {
 //        if (this == o) return true;
 //        if (o == null || getClass() != o.getClass()) return false;
 //
-//        Corpus corpus1 = (Corpus) o;
+//        Corpus.Corpus corpus1 = (Corpus.Corpus) o;
 //
 //        if (!corpus.equals(corpus1.corpus)) return false;
 //
@@ -196,10 +214,10 @@ public class Corpus implements java.io.Serializable {
 //
 //    public int getAverageNumberOfWordsForAuthor(String author) {
 //
-//        List<Corpus.Document> documents = corpus.get(author);
+//        List<Corpus.Corpus.Document> documents = corpus.get(author);
 //        int totalNumberOfWords = 0;
 //
-//        for(Corpus.Document document : documents){
+//        for(Corpus.Corpus.Document document : documents){
 //            System.out.println(document.getNumberOfWords());
 //            totalNumberOfWords += document.getNumberOfWords();
 //        }
@@ -212,10 +230,10 @@ public class Corpus implements java.io.Serializable {
 //    }
 //
 //    public double getAverageNumberOfURLsPerTweetForAuthor(String author) {
-//        List<Corpus.Document> documents = getDocumentsByAuthor(author);
+//        List<Corpus.Corpus.Document> documents = getDocumentsByAuthor(author);
 //        int numberOfURLs = 0;
 //
-//        for(Corpus.Document document : documents){
+//        for(Corpus.Corpus.Document document : documents){
 //            numberOfURLs += document.getNumberOfURLs();
 //        }
 //

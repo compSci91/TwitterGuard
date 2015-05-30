@@ -33,7 +33,7 @@ public class RapeStatusListener implements StatusListener {
 
     private void saveTweet(Status status) throws IOException {
         FileOutputStream fileOut =
-                new FileOutputStream("/Users/joshuahowell/Desktop/Twitter_Guard/Corpus/status"+ fileNumber++ + ".ser");
+                new FileOutputStream("/Users/joshuahowell/Desktop/Twitter_Guard/Corpus.Corpus/status"+ fileNumber++ + ".ser");
         ObjectOutputStream out = new ObjectOutputStream(fileOut);
         out.writeObject(status);
         out.close();

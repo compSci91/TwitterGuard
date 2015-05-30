@@ -23,5 +23,10 @@ public class NumberOfWordsNormalizerTests {
 
         assertEquals(12, new NumberOfWordsNormalizer().returnNormalizingValue(status), 0);
     }
+
+    @Test
+    public void ldjf(){
+        System.out.println(3.0 / 4);
+    }
 }
 

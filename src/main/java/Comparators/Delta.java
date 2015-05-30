@@ -4,33 +4,72 @@ import Features.StatusFeature;
 
 
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
-import Corpus.Document;
+import java.util.Map;
 
-public class Delta implements Comparator<List<Document>> {
+import Corpus.*;
+
+public class Delta implements Comparator<Document> {
+    Corpus corpus;
     Document queryDocument;
+    Map<StatusFeature, Double> means = new HashMap<StatusFeature, Double>();
+    Map<StatusFeature, Double> standardDeviations = new HashMap<StatusFeature, Double>();
 
-    public Delta(Document queryDocument){
+    public Delta(Corpus corpus, Document queryDocument){
+        this.corpus = corpus;
         this.queryDocument = queryDocument;
+        getMeans();
+        getStandardDeviations();
     }
 
-    public int compare(List<Document> authorProfile1, List<Document> authorProfile2) {
-        return 0;
+    public int compare(Document document1, Document document2) {
+        return (int) (delta(document2) - delta(document2));
     }
 
-    public double getZScore(StatusFeature statusFeature, List<Document> authorProfile){
-        double documentValue = queryDocument.getValueForFeature(statusFeature);
-        double mean = getMean(statusFeature, authorProfile);
-        double standardDeviation = getStandardDeviation(statusFeature, authorProfile);
+    private double delta(Document document){
+        List<StatusFeature> statusFeatures = queryDocument.getStatusFeatures();
+        double zScoreTotal = 0;
 
-        return (documentValue - mean) / standardDeviation;
+        for(StatusFeature statusFeature : statusFeatures){
+            zScoreTotal += (getZScore(statusFeature, queryDocument) - getZScore(statusFeature, document));
+        }
+
+        return zScoreTotal / statusFeatures.size();
     }
 
-    private double getStandardDeviation(StatusFeature statusFeature, List<Document> authorProfile) {
-        return 0;
+    private double getZScore(StatusFeature statusFeature, Document document){
+        return (document.getValueForFeature(statusFeature) - means.get(statusFeature)) / standardDeviations.get(statusFeature);
     }
 
-    private double getMean(StatusFeature statusFeature, List<Document> authorProfile) {
-        return 0;
+
+    private void getMeans() {
+        List<StatusFeature> statusFeatures = queryDocument.getStatusFeatures();
+        List<Document> documentsInCorpus = corpus.getAllDocuments();
+
+        for(StatusFeature statusFeature : statusFeatures){
+            double featureTotal = 0;
+            for(Document document : documentsInCorpus){
+               featureTotal += document.getValueForFeature(statusFeature);
+            }
+
+            means.put(statusFeature, featureTotal / documentsInCorpus.size());
+        }
     }
+
+    private void getStandardDeviations(){
+        List<StatusFeature> statusFeatures = queryDocument.getStatusFeatures();
+        List<Document> documentsInCorpus = corpus.getAllDocuments();
+
+        for(StatusFeature statusFeature : statusFeatures){
+            double total = 0;
+            for(Document document : documentsInCorpus){
+                total += Math.pow(document.getValueForFeature(statusFeature) - means.get(statusFeature), 2);
+            }
+
+            standardDeviations.put(statusFeature, Math.sqrt(total / documentsInCorpus.size()));
+        }
+
+    }
+
 }

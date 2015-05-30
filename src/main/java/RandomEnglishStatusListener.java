@@ -35,7 +35,7 @@ public class RandomEnglishStatusListener implements StatusListener {
 
         try{
         FileOutputStream fileOut =
-                new FileOutputStream("/Users/joshuahowell/Desktop/Twitter_Guard/Corpus/Normal_Tweets/status"+ fileNumber++ + ".ser");
+                new FileOutputStream("/Users/joshuahowell/Desktop/Twitter_Guard/Corpus.Corpus/Normal_Tweets/status"+ fileNumber++ + ".ser");
         ObjectOutputStream out = new ObjectOutputStream(fileOut);
         out.writeObject(statusText);
         out.close();

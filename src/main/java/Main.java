@@ -4,8 +4,8 @@ import twitter4j.conf.ConfigurationBuilder;
 public class Main {
 	public static void main(String[] args) {
 
-       // Corpus corpus = new Corpus();
-         //   corpus.generateAuthorandDocumentsFromTextFile("/Users/joshuahowell/Desktop/Twitter_Guard/Corpus/Rape Threats.txt");
+       // Corpus.Corpus corpus = new Corpus.Corpus();
+         //   corpus.generateAuthorandDocumentsFromTextFile("/Users/joshuahowell/Desktop/Twitter_Guard/Corpus.Corpus/Rape Threats.txt");
 
 //        ConfigurationBuilder cb = new ConfigurationBuilder();
 //        cb.setDebugEnabled(true)
