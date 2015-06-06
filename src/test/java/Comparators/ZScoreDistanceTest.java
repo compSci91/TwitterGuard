@@ -19,7 +19,7 @@ public class ZScoreDistanceTest {
         Document queryDocument = mock(Document.class);
         when(queryDocument.getValueForFeature(statusFeature)).thenReturn(25.0);
 
-        ZScoreDistance zScoreDistance = new Delta(corpus, queryDocument);
+        ZScoreDistance zScoreDistance = new ZScoreDistance(corpus);
 
         double actualZScoreDistance = zScoreDistance.getZScore(statusFeature, queryDocument);
         double expectedZScoreDistance = 10.0;
@@ -37,7 +37,7 @@ public class ZScoreDistanceTest {
         Document queryDocument = mock(Document.class);
         when(queryDocument.getValueForFeature(statusFeature)).thenReturn(89.0);
 
-        ZScoreDistance zScoreDistance = new Delta(corpus, queryDocument);
+        ZScoreDistance zScoreDistance = new ZScoreDistance(corpus);
 
         double actualZScoreDistance = zScoreDistance.getZScore(statusFeature, queryDocument);
         double expectedZScoreDistance = 17.0;

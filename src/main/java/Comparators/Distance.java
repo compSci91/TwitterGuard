@@ -7,9 +7,13 @@ import Features.StatusFeature;
 import java.util.Comparator;
 import java.util.List;
 
-public class Distance extends ZScoreDistance implements Comparator<Document> {
+public class Distance implements Comparator<Document> {
+    ZScoreDistance zScoreDistance;
+    Document queryDocument;
+
     public Distance(Corpus corpus, Document queryDocument){
-        super(corpus, queryDocument);
+        new ZScoreDistance(corpus);
+        this.queryDocument = queryDocument;
     }
 
     public int compare(Document document1, Document document2) {
@@ -21,7 +25,7 @@ public class Distance extends ZScoreDistance implements Comparator<Document> {
         double zScoreTotal = 0;
 
         for(StatusFeature statusFeature : statusFeatures){
-            zScoreTotal += Math.pow((getZScore(statusFeature, queryDocument) - getZScore(statusFeature, document)), 2);
+            zScoreTotal += Math.pow((zScoreDistance.getZScore(statusFeature, queryDocument) - zScoreDistance.getZScore(statusFeature, document)), 2);
         }
 
         return zScoreTotal / statusFeatures.size();
