@@ -5,6 +5,11 @@ import twitter4j.Status;
 
 public abstract class StatusFeature {
     protected Normalizer normalizer;
+
+    public void setNormalizer(Normalizer normalizer){
+        this.normalizer = normalizer;
+    }
+
     public abstract double returnValue(Status status);
 
     @Override
