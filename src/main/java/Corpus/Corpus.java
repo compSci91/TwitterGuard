@@ -38,7 +38,7 @@ public class Corpus implements java.io.Serializable {
         for(StatusFeature statusFeature : statusFeatures){
             double total = 0;
             for(Document document : documents){
-                total += Math.pow(document.getValueForFeature(statusFeature) - means.get(statusFeature), 2);
+                total += Math.pow(document.getValueForFeature(statusFeature) - getMean(statusFeature), 2);
             }
 
             standardDeviations.put(statusFeature, Math.sqrt(total / documents.size()));

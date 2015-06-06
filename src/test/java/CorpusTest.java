@@ -1,22 +1,60 @@
+import Corpus.*;
+import Features.NumberOfSentences;
+import Features.NumberOfWords;
+import Features.StatusFeature;
+
 import org.junit.Before;
 import org.junit.Test;
-import twitter4j.Status;
-import twitter4j.URLEntity;
 
+
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import java.io.*;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
 
 public class CorpusTest {
+    Corpus corpus;
+    StatusFeature numberOfWords = new NumberOfWords();
+    StatusFeature numberOfSentences = new NumberOfSentences();
 
+    @Before
+    public void setUp(){
+        Document document1 = mock(Document.class);
+        when(document1.getStatusFeatures()).thenReturn(new ArrayList<StatusFeature>(
+                Arrays.asList(numberOfWords, numberOfSentences)
+        ));
+
+        when(document1.getValueForFeature(numberOfWords)).thenReturn(11.0);
+        when(document1.getValueForFeature(numberOfSentences)).thenReturn(15.0);
+
+        Document document2 = mock(Document.class);
+        when(document2.getValueForFeature(numberOfWords)).thenReturn(4.0);
+        when(document2.getValueForFeature(numberOfSentences)).thenReturn(2.0);
+
+
+        Document document3 = mock(Document.class);
+        when(document3.getValueForFeature(numberOfWords)).thenReturn(3.0);
+        when(document3.getValueForFeature(numberOfSentences)).thenReturn(4.0);
+
+        corpus = new Corpus(new ArrayList<Document>(
+                Arrays.asList(document1, document2, document3)
+        ));
+    }
+
+    @Test
+    public void testGetMean() {
+        assertEquals(6, corpus.getMean(numberOfWords), 0);
+        assertEquals(7, corpus.getMean(numberOfSentences), 0);
+    }
+
+    @Test
+    public void testGetStandardDeviation(){
+        assertEquals(3.5590, corpus.getStandardDeviation(numberOfWords),  .0001);
+        assertEquals(5.7154, corpus.getStandardDeviation(numberOfSentences),  .0001);
+    }
+}
 //    private Corpus.Corpus corpus;
 //    private Corpus.Corpus.Document knowEverything;
 //    private Corpus.Corpus.Document afterLife;
@@ -297,6 +335,3 @@ public class CorpusTest {
 //
 //        assertEquals(5/3.0, corpus.getAverageNumberOfURLsPerTweetForAuthor("URL User"), 0);
 //    }
-
-
-}

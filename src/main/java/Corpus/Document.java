@@ -18,6 +18,18 @@ public class Document {
     private Status status;
     public final String AUTHOR;
 
+    public Document(Status status, String author, List<StatusFeature> statusFeatures){
+        this.status = status;
+        AUTHOR = author;
+
+        documentFeatures = new HashMap<StatusFeature, Double>();
+        this.statusFeatures = statusFeatures;
+
+        for(StatusFeature statusFeature : statusFeatures){
+            documentFeatures.put(statusFeature, new Double(statusFeature.returnValue(status)));
+        }
+    }
+
     public Document(Status status, String author){
         documentFeatures = new HashMap<StatusFeature, Double>();
         statusFeatures = new ArrayList<StatusFeature>();
