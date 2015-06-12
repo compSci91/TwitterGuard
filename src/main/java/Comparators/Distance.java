@@ -12,12 +12,13 @@ public class Distance implements Comparator<Document> {
     Document queryDocument;
 
     public Distance(Corpus corpus, Document queryDocument){
-        new ZScoreDistance(corpus);
+        zScoreDistance = new ZScoreDistance(corpus);
         this.queryDocument = queryDocument;
     }
 
     public int compare(Document document1, Document document2) {
-        return (int) (distance(document1) - distance(document2));
+        double actualDistance = distance(document1) - distance(document2);
+        return (int) (actualDistance * zScoreDistance.BILLSCONSTANT);
     }
 
     private double distance(Document document){

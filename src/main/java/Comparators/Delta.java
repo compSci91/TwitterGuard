@@ -17,7 +17,8 @@ public class Delta implements Comparator<Document>  {
     }
 
     public int compare(Document document1, Document document2) {
-        return (int) (delta(document1) - delta(document2));
+        double actualDelta = delta(document1) - delta(document2);
+        return (int) (actualDelta * ZScoreDistance.BILLSCONSTANT);
     }
 
     private double delta(Document document){
@@ -25,10 +26,8 @@ public class Delta implements Comparator<Document>  {
         double zScoreTotal = 0;
 
         for(StatusFeature statusFeature : statusFeatures){
-            System.out.println(zScoreDistance.getZScore(statusFeature, queryDocument));
             zScoreTotal += Math.abs((zScoreDistance.getZScore(statusFeature, queryDocument) - zScoreDistance.getZScore(statusFeature, document)));
         }
-
 
         return zScoreTotal / statusFeatures.size();
     }

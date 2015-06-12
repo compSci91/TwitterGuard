@@ -25,7 +25,7 @@ public class Document {
         documentFeatures = new HashMap<StatusFeature, Double>();
         this.statusFeatures = statusFeatures;
 
-        for(StatusFeature statusFeature : statusFeatures){
+        for(StatusFeature statusFeature : this.statusFeatures){
             documentFeatures.put(statusFeature, new Double(statusFeature.returnValue(status)));
         }
     }
