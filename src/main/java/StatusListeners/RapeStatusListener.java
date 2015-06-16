@@ -15,7 +15,6 @@ import java.util.regex.Pattern;
 public class RapeStatusListener implements StatusListener {
         private int fileNumber = 1;
 
-        @Override
         public void onStatus(Status status) {
             if(statusIsSuspicious(status)) {
                 System.out.println(status.getText());
@@ -72,27 +71,27 @@ public class RapeStatusListener implements StatusListener {
 
         return words;
     }
-        @Override
+
         public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) {
                /*Do nothing*/
         }
 
-        @Override
+
         public void onTrackLimitationNotice(int numberOfLimitedStatuses) {
             System.out.println("Got track limitation notice:" + numberOfLimitedStatuses);
         }
 
-        @Override
+
         public void onScrubGeo(long userId, long upToStatusId) {
             /* Do nothing */
         }
 
-        @Override
+
         public void onStallWarning(StallWarning warning) {
             System.out.println("Got stall warning:" + warning);
         }
 
-        @Override
+
         public void onException(Exception ex) {
             ex.printStackTrace();
         }
